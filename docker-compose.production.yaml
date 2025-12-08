@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  pg_data_prod:
+  static:
+  media:
+
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data_prod:/var/lib/postgresql/data
+
+  backend:
+    image: steplet/kittygram_backend
+    env_file: .env
+    volumes:
+      - static:/backend_static
+      - media:/media
+    depends_on:
+      - db
+
+  frontend:
+    env_file: .env
+    image: steplet/kittygram_frontend
+    command: cp -r /app/build/. /frontend_static/
+    volumes:
+      - static:/frontend_static
+    depends_on:
+      - backend 
+
+  gateway:
+    image: steplet/kittygram_gateway
+    env_file: .env
+    ports:
+      - 8081:80
+    volumes:
+      - static:/static
+      - media:/media
