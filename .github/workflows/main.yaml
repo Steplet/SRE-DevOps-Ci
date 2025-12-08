@@ -61,6 +61,6 @@ jobs:
           with:
             context: ./backend/
             push: true
-            tags: momcode/kittygram_backend:latest
+            tags: steplet/kittygram_backend:latest
 
     
