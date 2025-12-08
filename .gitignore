@@ -2,3 +2,5 @@
 .DS_Store
 test.txt
 backend/venv/*
+backend/kittygram_backend/__pycache__/*
+backend/cats/__pycache__/*
