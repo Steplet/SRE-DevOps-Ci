@@ -27,14 +27,12 @@ services:
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
-    depends_on:
-      - backend 
 
   gateway:
     image: steplet/kittygram_gateway
     env_file: .env
     ports:
-      - 8081:80
+      - 80:80
     volumes:
       - static:/static
       - media:/media
